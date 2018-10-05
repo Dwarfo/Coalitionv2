@@ -33,6 +33,7 @@ public class PirateBehaviour : MonoBehaviour {
     {
         if (target != null)
         {
+            RotateTowards(transform, target.position);
             distance = Vector2.Distance(transform.position, target.position);
             if (distance < 8 && currentBehaviour != Behaviours.ATTACKING)
                 ChangeBehaviour(Behaviours.ATTACKING);
@@ -85,6 +86,15 @@ public class PirateBehaviour : MonoBehaviour {
     {
         return target;
     }
+
+    public static void RotateTowards(Transform character, Vector3 direction)
+    {
+        Vector3 difference = direction - character.position;
+        difference.Normalize();
+        float rotation_z = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg - 90;
+        character.rotation = Quaternion.Slerp(character.rotation, Quaternion.Euler(0f, 0f, rotation_z), Time.deltaTime * 5f);
+    }
+
 
 }
 

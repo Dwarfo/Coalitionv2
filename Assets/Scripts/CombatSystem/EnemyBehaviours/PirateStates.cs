@@ -33,7 +33,7 @@ public class PirateStates : MonoBehaviour
 
         rand = new WeightedRandom<randomAction>();
         rand.AddItem(new randomAction(10, 2, Rotate));
-        rand.AddItem(new randomAction(35, 0, Idling));
+        rand.AddItem(new randomAction(100, 0, Idling));
         rand.AddItem(new randomAction(5, 0.3f, Fire));
 
         /*
@@ -117,9 +117,10 @@ public class PirateStates : MonoBehaviour
         if (action.isDone)
         {
             doAction += action.toDoAction;
-            StartCoroutine(RemoveAction(action, doAction));
+            StartCoroutine(RemoveAction(action));
         }
 
+        Debug.Log("Number of listeners: " + doAction.GetInvocationList().Length);
 
     }
 
@@ -139,13 +140,13 @@ public class PirateStates : MonoBehaviour
 
     }
 
-    private IEnumerator RemoveAction(randomAction actionToRemove, Action action)
+    private IEnumerator RemoveAction(randomAction actionToRemove)
     {
         actionToRemove.isDone = false;
         yield return new WaitForSeconds(actionToRemove.waitFor);
-        action -= actionToRemove.toDoAction;
+        doAction -= actionToRemove.toDoAction;
         actionToRemove.isDone = true;
-        
+
     }
 
     private Vector2 ClampVelocity(Vector2 velocity)
