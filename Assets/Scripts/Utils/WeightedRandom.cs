@@ -29,6 +29,21 @@ public class WeightedRandom<T> where T : IWeighted/*, IComparable<T>*/
         SetCummulativeWeights();
     }
 
+    public void SetNewList(List<T> newList)
+    {
+        weightSum = 0;
+        defaultWeights = new Dictionary<T, int>();
+        this.items = new List<T>(newList);
+        foreach (var item in items)
+        {
+            defaultWeights.Add(item, item.Weight);
+            weightSum += item.Weight;
+        }
+
+        SetCummulativeWeights();
+
+    }
+
     public void AddItem(T newItem)
     {
         weightSum += newItem.Weight;

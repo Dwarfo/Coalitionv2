@@ -11,8 +11,12 @@ public class Weapon : MonoBehaviour
     public Events.OnCoolDownStarted onCoolDownStarted;
     public bool isNotAtCooldown = true;
 
+    private AudioSource audioSource;
+
     private void Start()
     {
+        if (audioSource == null)
+            audioSource = gameObject.GetComponent<AudioSource>();
         if (coolDown == -1)
             coolDown = currentWeapon.coolDown;
     }
@@ -25,6 +29,10 @@ public class Weapon : MonoBehaviour
             ResetCooldown();
             onCoolDownStarted.Invoke(coolDown);
             Invoke("ResetCooldown", coolDown);
+
+            int index = Random.Range(0, currentWeapon.shootingAudio.Length - 1);
+            //Debug.Log("Index " + index + " Length " + currentWeapon.shootingAudio.Length);
+            audioSource.PlayOneShot(currentWeapon.shootingAudio[index]);
 
         }
     }

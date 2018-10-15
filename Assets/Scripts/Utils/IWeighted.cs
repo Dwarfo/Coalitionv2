@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IWeighted {
-
+public interface IWeighted
+{
     int Weight { get; set; }
 }

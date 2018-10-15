@@ -7,6 +7,6 @@ public class MisileSO : ScriptableObject
 {
     public GameObject misile;
     public float coolDown;
-    public AudioClip[] shooting;
+    public AudioClip[] shootingAudio;
    
 }

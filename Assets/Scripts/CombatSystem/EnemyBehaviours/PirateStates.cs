@@ -14,8 +14,9 @@ public class PirateStates : MonoBehaviour
     private float dragValue;
     private Weapon weapon;
     private IEnumerator coroutine;
-    private WeightedRandom<randomAction> rand;
     private Transform firePos;
+
+    private WeightedRandom<randomAction> rand;
 
 
     void Start()
@@ -31,11 +32,13 @@ public class PirateStates : MonoBehaviour
             firePos = gameObject.transform.Find("FirePosition");
 
 
-        rand = new WeightedRandom<randomAction>();
-        rand.AddItem(new randomAction(10, 2, Rotate));
-        rand.AddItem(new randomAction(100, 0, Idling));
-        rand.AddItem(new randomAction(5, 0.3f, Fire));
 
+        List<randomAction> attackList = new List<randomAction>();
+        attackList.Add(new randomAction(10, 2, Rotate));
+        attackList.Add(new randomAction(100, 0, Idling));
+        attackList.Add(new randomAction(5, 0.3f, Fire));
+
+        rand = new WeightedRandom<randomAction>(attackList);
         /*
         #region Testing Random
 
@@ -80,14 +83,15 @@ public class PirateStates : MonoBehaviour
         {
             case Behaviours.ATTACKING:
                 gameObject.GetComponent<Rigidbody2D>().drag = dragValue;
-                doAction = AttackTarget;
-                
-                
+                doAction = BehaviourAction;
+
                 break;
             case Behaviours.CHASING:
                 gameObject.GetComponent<Rigidbody2D>().drag = 0;
                 doAction = ChaseTarget;
+
                 Debug.Log("I see Player");
+
                 break;
             case Behaviours.FLEEING:
 
@@ -107,10 +111,17 @@ public class PirateStates : MonoBehaviour
         //float distance = Vector2.Distance(gameObject.transform.position, target.position);
         pirate.AddForce(direction * 5);
         pirate.velocity = ClampVelocity(pirate.velocity);
+
+        randomAction action = rand.GetRandomValue();
+        if (action.toDoAction.Equals((Action)Fire) && action.isDone)
+        {
+            doAction += action.toDoAction;
+            StartCoroutine(RemoveAction(action));
+        }
     }
 
 
-    private void AttackTarget()
+    private void BehaviourAction()
     {
         randomAction action = rand.GetRandomValue();
 
@@ -127,7 +138,6 @@ public class PirateStates : MonoBehaviour
     private void Rotate()
     {
         transform.RotateAround(target.position, transform.forward, 1);
-
     }
 
     private void Fire()

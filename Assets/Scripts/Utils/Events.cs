@@ -19,6 +19,9 @@ public class Events
     public class OnBehaviourChanged : UnityEvent<Behaviours> { }
 
     [System.Serializable]
+    public class OnBattleStateChanged : UnityEvent<BattleState> { }
+
+    [System.Serializable]
     public class OnPlayerDamageReceived : UnityEvent<float> { }
 
     [System.Serializable]

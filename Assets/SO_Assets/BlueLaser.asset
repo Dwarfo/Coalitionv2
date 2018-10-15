@@ -13,5 +13,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   misile: {fileID: 1364777990667906, guid: ab43bdb347bd5824a8dbe1dba70a578c, type: 2}
   coolDown: 0.2
-  shooting: []
-  isNotAtCooldown: 1
+  shootingAudio:
+  - {fileID: 8300000, guid: 952118d427ea76e4c8da149165b09192, type: 3}
+  - {fileID: 8300000, guid: 911fabda4fd17924c96388166debff78, type: 3}
+  - {fileID: 8300000, guid: 3f1a045dcf6cf314eaec633e037b3058, type: 3}
+  - {fileID: 8300000, guid: 43c7eaccda95ede4b90078633b7b2373, type: 3}
+  - {fileID: 8300000, guid: 07c2f7292a0bd534a853901a736dc133, type: 3}
