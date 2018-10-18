@@ -27,7 +27,7 @@ public abstract class Stats : MonoBehaviour
     {
         currentHp -= amount;
         if (currentHp <= 0)
-            onDestroy.Invoke();
+            GetDestroyed();
     }
 
     public virtual void IncreaseHp(float amount)
@@ -35,6 +35,11 @@ public abstract class Stats : MonoBehaviour
         currentHp += amount;
         if (currentHp >= maxHp)
             currentHp = maxHp;
+    }
+
+    public virtual void GetDestroyed()
+    {
+        onDestroy.Invoke();
     }
 }
 

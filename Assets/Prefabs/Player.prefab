@@ -325,6 +325,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: Events+OnDestroy, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+  explosion: {fileID: 1550819427981938, guid: 05d2f8e3eda5d9f439519e4ed89f91c7, type: 2}
 --- !u!114 &114298413052913680
 MonoBehaviour:
   m_ObjectHideFlags: 1

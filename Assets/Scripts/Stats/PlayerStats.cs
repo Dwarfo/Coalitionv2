@@ -78,6 +78,13 @@ public class PlayerStats : Stats
         onHpChanged.Invoke(currentHp);
     }
 
+    public override void GetDestroyed()
+    {
+        Instantiate(explosion, gameObject.transform.position, gameObject.transform.rotation);
+        base.GetDestroyed();
+        gameObject.SetActive(false);
+    }
+
     private void HandleShieldActivated()
     {
 
@@ -97,9 +104,7 @@ public class PlayerStats : Stats
             //shieldAnim.Play("ShieldClosing");
             Debug.Log("STH");
         }
-            
-        
-
     }
-  
+
+    public GameObject explosion;
 }

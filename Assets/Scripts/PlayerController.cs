@@ -27,7 +27,6 @@ public class PlayerController : MonoBehaviour {
         playerStats = gameObject.GetComponent<PlayerStats>();
         if (firingPosition == null)
             firingPosition = gameObject.transform.Find("FirePosition");
-
         
     }
 	
@@ -41,7 +40,7 @@ public class PlayerController : MonoBehaviour {
         }
         else
         {
-            direction = new Vector2(Input.GetAxisRaw("Horizontal") * acceleration / 2, Input.GetAxisRaw("Vertical") * acceleration / 2);
+            direction = new Vector2(Input.GetAxisRaw("Horizontal") * acceleration * 0.7f, Input.GetAxisRaw("Vertical") * acceleration * 0.7f);
             RotateTowards(transform, Camera.main.ScreenToWorldPoint(Input.mousePosition));
         }
 

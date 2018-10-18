@@ -11,7 +11,12 @@ public class PirateStats : Stats {
         HARD
     }
 
+    public GameObject explosion;
 
-
-
+    public override void GetDestroyed()
+    {
+        Instantiate(explosion, gameObject.transform.position, gameObject.transform.rotation);
+        base.GetDestroyed();
+        Destroy(gameObject);
+    }
 }
