@@ -1,0 +1,90 @@
+
+db.people.count()
+
+db.people.findOne()
+
+db.people.findOne({"nationality":"China","sex":"Female"})
+
+db.people.find({"nationality":"Germany","sex":"Male"})
+
+db.people.find({"weight":{"$gte": "68","$lte": "71.5"}})
+
+db.people.find({"birth_date":{"$gte":"2000-01-01"} },{first_name: 1, last_name: 1, "location.city": 1 } )
+
+db.people.insertOne({"sex":"Male","first_name":"Denys","last_name":"Yelchaninov","job":"Superhero","email":"fat@ssets.com","location":{"city":"Warsaw","address":{"streetname":"Beilfuss","streetnumber":"860"}},"description":"Lubit smieshnije memasy prirodu i Buddu","height":"182.38","weight":"81.5","birth_date":"1995-02-21T02:55:03Z","nationality":"Kekistan","credit":[{"type":"switch","number":"6759888939100098699","currency":"COP","balance":"5117.06"}]})
+db.people.find({"first_name":"Denys","last_name": "Yelchaninov"})
+
+db.People.find({"height": {"$gte":"180"}})
+db.People.remove({"height": {"$gte":"180"}})
+
+db.people.insertOne({"sex":"Male","first_name":"Vasily","last_name":"Pupkin","job":"Superhero","email":"fat@ssets.com","location":{"city":"Moscow","address":{"streetname":"Beilfuss","streetnumber":"860"}},"description":"Lubit smieshnije memasy prirodu i Buddu","height":"182.38","weight":"81.5","birth_date":"1995-02-21T02:55:03Z","nationality":"Kekistan","credit":[{"type":"switch","number":"6759888939100098699","currency":"COP","balance":"5117.06"}]})
+
+
+
+db.people.updateMany({"location.city":"Moscow"}, {"$set": {"location.city": "Moskwa"}})
+db.people.find({"location.city": "Moskwa"})
+
+db.people.find({"first_name":"Antonio"})
+db.people.updateMany({"first_name":"Antonio"}, {"$set":{"hobby":"pingpong" }})
+
+db.people.find({"job":"Editor"})
+db.people.updateMany({"job":"Editor"}, {"$unset":{"email":1 }})
+
+
+//Cz2
+db.people.aggregate(  
+ [{$match:{} },
+    {$group:
+         {
+           _id: "$sex",
+           avgWeight: { $avg: "$weight" } ,
+           avgHeight: { $avg: "$height" }
+         }
+    }  
+])
+
+
+db.people.mapReduce(
+    function(){emit{this._id, this.weight,this.height};
+
+    
+
+
+
+)
+
+
+db.people.aggregate(  
+ [{$match:{} },
+    {$group:
+         {
+           _id: "$credit.currency",
+           Sum: { $sum: "$credit.balance" } ,
+         }
+    }  
+])
+
+
+db.people.runCommand({distinct: "people", key: "job"})
+
+//Function ?
+db.people.aggregate( 
+    {$group:
+         {
+           _id: "$nationality",
+           Min_bmi: { $sum: "$credit.balance" } ,
+           Max_bmi: {$avg: "$credit.balance"}
+         }
+    }  )
+
+
+db.people.aggregate(  
+ [{$match:{"sex": "Female", "nationality": "Poland"} },
+    {$group:
+         {
+           _id: "$credit.currency",
+           Sum: { $sum: "$credit.balance" } ,
+           Avg: {$avg: "$credit.balance"}
+         }
+    }  
+])

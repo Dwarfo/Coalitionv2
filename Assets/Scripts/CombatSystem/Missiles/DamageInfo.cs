@@ -20,4 +20,10 @@ public class DamageInfo : MonoBehaviour {
         if (collision.gameObject.GetComponent<Stats>() != null)
             collision.gameObject.GetComponent<Stats>().DecreaseHp(damage);
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.GetComponent<Stats>() != null)
+            collision.gameObject.GetComponent<Stats>().DecreaseHp(damage);
+    }
 }

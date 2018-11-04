@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PirateStats : Stats {
 
+
     public enum Difficulty
     {
         EASY,
@@ -19,4 +20,6 @@ public class PirateStats : Stats {
         base.GetDestroyed();
         Destroy(gameObject);
     }
+
+
 }

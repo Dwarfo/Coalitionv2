@@ -26,4 +26,13 @@ public class Events
 
     [System.Serializable]
     public class OnCoolDownStarted : UnityEvent<float> { }
+
+    [System.Serializable]
+    public class OnBackGroundRan : UnityEvent<Transform, float> { }
+
+    [System.Serializable]
+    public class OnActionFinished : UnityEvent<Move> { }
+
+    //[System.Serializable]
+    public class FloatEvent : UnityEvent<float> { }
 }

@@ -31,6 +31,11 @@ public class LaserControls : MonoBehaviour {
         Destroy(gameObject);
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Destroy(gameObject);
+    }
+
     private void OnDestroy()
     {
         if (explosion != null)
